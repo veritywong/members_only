@@ -2,4 +2,6 @@
 <% @posts.each do |post| %>
   <h3><%= post.title %></h3>
   <%= post.content %>
+  <% post_creator = post.user %>
+  <%= post_creator.username if post_creator.username && current_user == post_creator %>
 <% end %>

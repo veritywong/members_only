@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+    before_action :authenticate_user!
+    
     def index
         @posts = Post.all
     end
@@ -13,10 +15,17 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(post_params)
+        @post.update(user_id: current_user.id)
         if @post.save
-            redirect_to :post_path
+            redirect_to :posts
         else
             render :new, status: :unprocessable_entity
         end
+    end
+
+    private
+
+    def post_params
+        params.require(:post).permit(:title, :content)
     end
 end

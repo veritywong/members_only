@@ -1,0 +1,5 @@
+<h1>Posts Index</h1>
+<% @posts.each do |post| %>
+  <h3><%= post.title %></h3>
+  <%= post.content %>
+<% end %>
